@@ -12,9 +12,15 @@ resources:
   - authpg-secret.yaml
   - authpg-deployment.yaml
   - authpg-service.yaml
+  - profilepg-pvc.yaml
+  - profilepg-secret.yaml
+  - profilepg-deployment.yaml
+  - profilepg-service.yaml
   - blog-deployment.yaml
   - blog-service.yaml
   - auth-deployment.yaml
   - auth-service.yaml
+  - profile-deployment.yaml
+  - profile-service.yaml
   - dwp-ui-deployment.yaml
   - dwp-ui-service.yaml

@@ -1,0 +1,12 @@
+# profilepg-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-profile
+  namespace: dwp-dev
+spec:
+  selector:
+    app: postgres-profile
+  ports:
+    - port: 5432
+      targetPort: 5432

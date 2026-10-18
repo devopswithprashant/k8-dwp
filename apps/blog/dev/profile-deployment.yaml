@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-backend
+  namespace: dwp-dev
+  labels:
+    app: profile-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile-backend
+  template:
+    metadata:
+      labels:
+        app: profile-backend
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: profile-backend
+          image: profile-service:v0.0.1-SNAPSHOT
+          imagePullPolicy: Never   # ← important!
+          #image: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/auth:v1.0.11
+          ports:
+           - containerPort: 8080
+          env:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://postgres-profile:5432/profiledb?serverTimezone=UTC
+          - name: SPRING_DATASOURCE_USERNAME
+            value: profileuser
+          - name: SPRING_DATASOURCE_PASSWORD
+            value: profileuser
+          - name: SERVER_PORT
+            value: "8080"
+
+
+
+            
