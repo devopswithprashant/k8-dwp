@@ -27,11 +27,15 @@ spec:
           ports:
            - containerPort: 8080
           env:
-          - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://postgres-profile:5432/profiledb?serverTimezone=UTC
-          - name: SPRING_DATASOURCE_USERNAME
+          - name: DB_HOST
+            value: postgres-profile
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_NAME
+            value: profiledb
+          - name: DB_USER
             value: profileuser
-          - name: SPRING_DATASOURCE_PASSWORD
+          - name: DB_PASSWORD
             value: profileuser
           - name: SERVER_PORT
             value: "8080"
