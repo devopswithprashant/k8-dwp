@@ -35,6 +35,9 @@ spec:
             value: bloguser
           - name: SERVER_PORT
             value: "8080"
+          - name: JWT_SECRET
+            value: "EbGNZMTC/FrQFE/Jc8/wNowz+KO/nlULURi+5NnEI7BYJyWKYOH2VFwwqG8dbjw2"
+
 
 
 
