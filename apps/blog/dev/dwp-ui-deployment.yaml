@@ -26,7 +26,7 @@ spec:
       containers:
         - name: ui
           # Replace with your registry image built from this repo's Dockerfile
-          image: dwp-ui:1.4.4.2-SNAPSHOT
+          image: ui:v1
           imagePullPolicy: Never   # ← important!
           ports:
             - name: http
@@ -42,9 +42,9 @@ spec:
               value: auth-service
             - name: AUTH_SERVICE_PORT
               value: "8081"
-            - name: USER_SERVICE_HOST
+            - name: PROFILE_SERVICE_HOST
               value: profile-service
-            - name: USER_SERVICE_PORT
+            - name: PROFILE_SERVICE_PORT
               value: "8080"
             - name: SERVICE_NAME
               value: ui
