@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: profile-backend
-          image: docker.io/devopswithprashant/dwp-np-profile-service:0.0.3-SNAPSHOT-98c29b83d20639779149c1dfdd5b3336d918d34d
+          image: docker.io/devopswithprashant/dwp-np-profile-service:0.0.3-SNAPSHOT-32049b870ab6f9c2461b40c3e3dbbc6f8a4370c3
           ports:
            - containerPort: 8080
            - containerPort: 9090
