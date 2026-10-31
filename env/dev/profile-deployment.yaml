@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-backend
+  namespace: dwp-dev
+  labels:
+    app: profile-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile-backend
+  template:
+    metadata:
+      labels:
+        app: profile-backend
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: profile-backend
+          image: docker.io/devopswithprashant/dwp-np-profile-service:0.0.3-SNAPSHOT-5bad477ebe587fdc5f89215e6413902b84210365
+          ports:
+           - containerPort: 8080
+           - containerPort: 9090
+          env:
+          - name: DB_HOST
+            value: postgres-profile
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_NAME
+            value: profiledb
+          - name: DB_USER
+            value: profileuser
+          - name: DB_PASSWORD
+            value: profileuser
+          - name: SERVER_PORT
+            value: "8080"
+          - name: JWT_SECRET
+            value: "EbGNZMTC/FrQFE/Jc8/wNowz+KO/nlULURi+5NnEI7BYJyWKYOH2VFwwqG8dbjw2
+
+
+
+
+            

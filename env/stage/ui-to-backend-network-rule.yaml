@@ -37,3 +37,37 @@ spec:
       ports:
         - protocol: TCP
           port: 8081
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-to-profile-backend
+  namespace: dwp-stage
+spec:
+  podSelector:
+    matchLabels:
+      app: profile-backend
+  policyTypes:
+  - Ingress
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: dwp-platform-ui
+      ports:
+        - protocol: TCP
+          port: 8080
+    - from:
+      - podSelector:
+          matchLabels:
+            app: auth-backend
+      ports:
+        - protocol: TCP
+          port: 9090
+    - from:
+      - podSelector:
+          matchLabels:
+            app: blog-backend
+      ports:
+        - protocol: TCP
+          port: 8080

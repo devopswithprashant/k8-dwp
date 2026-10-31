@@ -33,6 +33,10 @@ spec:
             value: qabloguser
           - name: SERVER_PORT
             value: "8080"
+          - name: JWT_SECRET
+            value: "EbGNZMTC/FrQFE/Jc8/wNowz+KO/nlULURi+5NnEI7BYJyWKYOH2VFwwqG8dbjw2"
+          - name: PROFILE_SERVICE_BASE_URL
+            value: http://profile-service:8080
 
 
 

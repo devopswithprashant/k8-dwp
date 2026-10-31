@@ -40,6 +40,10 @@ spec:
               value: auth-service
             - name: AUTH_SERVICE_PORT
               value: "8081"
+            - name: PROFILE_SERVICE_HOST
+              value: profile-service
+            - name: PROFILE_SERVICE_PORT
+              value: "8080"
             - name: SERVICE_NAME
               value: ui
             - name: NODE_ENV
