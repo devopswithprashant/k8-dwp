@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: blog-backend
-          image: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/np/blog:1.4.4-SNAPSHOT-8f05cf4a5ebca5e315a9529ad1b3f45e7160fdeb
+          image: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/np/blog:1.5.0-SNAPSHOT-09072525fa274c934c781f027c474489bcc4550b
           ports:
            - containerPort: 8080
           env:
