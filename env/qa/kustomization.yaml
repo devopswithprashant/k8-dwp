@@ -6,6 +6,8 @@ resources:
   - ui-to-backend-network-rule.yaml
   - auth-deployment.yaml
   - auth-service.yaml
+  - profile-deployment.yaml
+  - profile-service.yaml
   - blog-deployment.yaml
   - blog-service.yaml
   - dwp-ui-deployment.yaml

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: blog-backend
-          image: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/blog:v1.4.2
+          image: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/blog:v1.5.0
           ports:
            - containerPort: 8080
           env:
@@ -33,6 +33,10 @@ spec:
             value: stagebloguser
           - name: SERVER_PORT
             value: "8080"
+          - name: JWT_SECRET
+            value: "EbGNZMTC/FrQFE/Jc8/wNowz+KO/nlULURi+5NnEI7BYJyWKYOH2VFwwqG8dbjw2"
+          - name: PROFILE_SERVICE_BASE_URL
+            value: http://profile-service:8080
 
 
 
