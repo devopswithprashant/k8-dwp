@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: ui
-          image: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/np/ui:1.5.0-SNAPSHOT-dadf7b7b3ab4435026a8c70e0f60fc9b4d21244c
+          image: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/ui:v1.5.0
           ports:
             - name: http
               containerPort: 80
