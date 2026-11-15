@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dwp-platform-nonprod
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - environment: dev
+            namespace: dwp-dev
+          - environment: qa
+            namespace: dwp-qa
+          - environment: stage
+            namespace: dwp-stage
+  template:
+    metadata:
+      name: dwp-platform-{{ .environment }}
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/devopswithprashant/k8-dwp.git
+        targetRevision: main
+        path: charts/dwp-platform
+        helm:
+          releaseName: dwp-platform-{{ .environment }}
+          valueFiles:
+            - values-{{ .environment }}.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{ .namespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

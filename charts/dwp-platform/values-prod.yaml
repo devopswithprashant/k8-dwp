@@ -1,0 +1,38 @@
+environment: prod
+
+auth:
+  image:
+    repository: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/auth
+    tag: v1.0.0
+  replicas: 1
+  database:
+    url: jdbc:postgresql://dwp-platform-prod.ch8cowcymvme.eu-west-1.rds.amazonaws.com:5432/authdb?serverTimezone=UTC
+
+
+blog:
+  image:
+    repository: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/blog
+    tag: v1.5.0
+  replicas: 2
+  database:
+    url: jdbc:postgresql://dwp-platform-prod.ch8cowcymvme.eu-west-1.rds.amazonaws.com:5432/blogdb?serverTimezone=UTC
+
+profile:
+  image:
+    repository: docker.io/devopswithprashant/dwp-profile-service
+    tag: v0.0.4
+  replicas: 1
+  database:
+    host: dwp-platform-prod.ch8cowcymvme.eu-west-1.rds.amazonaws.com
+    port: "5432"
+    name: profiledb
+  serverPort: "8080"
+
+ui:
+  image:
+    repository: 850756192530.dkr.ecr.us-east-1.amazonaws.com/dwp/ui
+    tag: v1.5.0
+  replicas: 1
+  service:
+    type: LoadBalancer
+  logLevel: info

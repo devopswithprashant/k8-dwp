@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-backend
+  labels:
+    app: profile-backend
+    {{- include "dwp-platform.commonLabels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.profile.replicas }}
+  selector:
+    matchLabels:
+      app: profile-backend
+  template:
+    metadata:
+      labels:
+        app: profile-backend
+        {{- include "dwp-platform.commonLabels" . | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: profile-backend
+          image: "{{ .Values.profile.image.repository }}:{{ .Values.profile.image.tag }}"
+          ports:
+            - containerPort: 8080
+            - containerPort: 9090
+          env:
+            - name: DB_HOST
+              value: {{ .Values.profile.database.host | quote }}
+            - name: DB_PORT
+              value: {{ .Values.profile.database.port | quote }}
+            - name: DB_NAME
+              value: {{ .Values.profile.database.name | quote }}
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.existingSecretName }}
+                  key: profile-db-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.existingSecretName }}
+                  key: profile-db-password
+            - name: SERVER_PORT
+              value: {{ .Values.profile.serverPort | quote }}
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.existingSecretName }}
+                  key: profile-jwt-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: profile-service
+  labels:
+    app: profile-backend
+    {{- include "dwp-platform.commonLabels" . | nindent 4 }}
+spec:
+  selector:
+    app: profile-backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+      name: grpc
+  type: ClusterIP
